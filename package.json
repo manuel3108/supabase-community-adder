@@ -15,10 +15,10 @@
 		"create-temp": "sv create temp --check-types typescript --template skeleton --no-adders --no-install"
 	},
 	"dependencies": {
-		"@svelte-cli/core": "workspace:*"
+		"@svelte-cli/core": "https://pkg.pr.new/sveltejs/cli/@svelte-cli/core@d4fa542"
 	},
 	"devDependencies": {
-		"sv": "workspace:*"
+		"sv": "https://pkg.pr.new/sveltejs/cli/sv@d4fa542"
 	},
 	"files": [
 		"src",
