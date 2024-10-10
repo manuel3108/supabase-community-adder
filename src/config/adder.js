@@ -5,7 +5,7 @@ import {
     addGlobalAppInterface,
     hasTypeProp,
     createPrinter,
-} from '../../common.ts';
+} from '@svelte-cli/core/shared';
 import { common, imports } from '@svelte-cli/core/js';
 import { addFromRawHtml } from '@svelte-cli/core/html';
 import { demos } from './demos.ts';
@@ -66,12 +66,10 @@ export const adder = defineAdderConfig({
     files: [
         {
             name: () => '.env',
-            contentType: 'text',
             content: generateEnvFileContent,
         },
         {
             name: () => '.env.example',
-            contentType: 'text',
             content: generateEnvFileContent,
         },
         // Common to all Auth options
@@ -313,7 +311,6 @@ export const adder = defineAdderConfig({
                 `${kit?.routesDirectory}/auth/+page.server.${
                     typescript ? 'ts' : 'js'
                 }`,
-            contentType: 'text',
             condition: ({ options }) =>
                 options.auth.includes('basic') ||
                 options.auth.includes('magic-link'),
@@ -391,7 +388,6 @@ export const adder = defineAdderConfig({
         },
         {
             name: ({ kit }) => `${kit?.routesDirectory}/auth/+page.svelte`,
-            contentType: 'text',
             condition: ({ options }) => options.auth.length > 0,
             content: ({ options, typescript }) => {
                 const isBasic = options.auth.includes('basic');
@@ -442,7 +438,6 @@ export const adder = defineAdderConfig({
         {
             name: ({ kit }) =>
                 `${kit?.routesDirectory}/auth/forgot-password/+page.svelte`,
-            contentType: 'text',
             condition: ({ options }) => options.auth.includes('basic'),
             content: ({ typescript }) => {
                 const [ts] = createPrinter(typescript);
@@ -474,7 +469,6 @@ export const adder = defineAdderConfig({
                 `${kit?.routesDirectory}/auth/forgot-password/+page.server.${
                     typescript ? 'ts' : 'js'
                 }`,
-            contentType: 'text',
             condition: ({ options }) => options.auth.includes('basic'),
             content: ({ typescript }) => {
                 const [ts] = createPrinter(typescript);
@@ -507,7 +501,6 @@ export const adder = defineAdderConfig({
                 `${kit?.routesDirectory}/auth/reset-password/+page.server.${
                     typescript ? 'ts' : 'js'
                 }`,
-            contentType: 'text',
             condition: ({ options }) => options.auth.includes('basic'),
             content: ({ typescript }) => {
                 const [ts] = createPrinter(typescript);
@@ -534,7 +527,6 @@ export const adder = defineAdderConfig({
         {
             name: ({ kit }) =>
                 `${kit?.routesDirectory}/auth/reset-password/+page.svelte`,
-            contentType: 'text',
             condition: ({ options }) => options.auth.includes('basic'),
             content: ({ typescript }) => {
                 const [ts] = createPrinter(typescript);
@@ -567,7 +559,6 @@ export const adder = defineAdderConfig({
                 `${kit?.routesDirectory}/auth/confirm/+server.${
                     typescript ? 'ts' : 'js'
                 }`,
-            contentType: 'text',
             condition: ({ options }) =>
                 options.auth.includes('basic') ||
                 options.auth.includes('magic-link'),
@@ -607,7 +598,6 @@ export const adder = defineAdderConfig({
                 `${kit?.libDirectory}/server/supabase-admin.${
                     typescript ? 'ts' : 'js'
                 }`,
-            contentType: 'text',
             condition: ({ options }) => options.admin,
             content: ({ options, typescript }) => {
                 const [ts] = createPrinter(
@@ -654,7 +644,6 @@ export const adder = defineAdderConfig({
         // CLI local development configuration
         {
             name: () => './supabase/config.toml',
-            contentType: 'text',
             condition: ({ options }) => options.cli,
             content: ({ content, options }) => {
                 const isBasic = options.auth.includes('basic');
@@ -706,7 +695,6 @@ export const adder = defineAdderConfig({
         },
         {
             name: () => './supabase/templates/confirmation.html',
-            contentType: 'text',
             condition: ({ options }) =>
                 options.cli && options.auth.includes('basic'),
             content: () => {
@@ -726,7 +714,6 @@ export const adder = defineAdderConfig({
         },
         {
             name: () => './supabase/templates/magic_link.html',
-            contentType: 'text',
             condition: ({ options }) =>
                 options.cli && options.auth.includes('magic-link'),
             content: () => {
@@ -745,7 +732,6 @@ export const adder = defineAdderConfig({
         },
         {
             name: () => './supabase/templates/recovery.html',
-            contentType: 'text',
             condition: ({ options }) =>
                 options.cli && options.auth.includes('basic'),
             content: () => {

@@ -2,7 +2,7 @@ import { dedent } from '@svelte-cli/core';
 import { options } from './options.ts';
 import { common, imports } from '@svelte-cli/core/js';
 import { addFromRawHtml } from '@svelte-cli/core/html';
-import { createPrinter } from '../../common.ts';
+import { createPrinter } from '@svelte-cli/core/shared';
 
 /** @type {Array<import('@svelte-cli/core').FileType<typeof options>>} */
 export const demos = [
@@ -49,7 +49,6 @@ export const demos = [
             `${kit?.routesDirectory}/private/+layout.server.${
                 typescript ? 'ts' : 'js'
             }`,
-        contentType: 'text',
         condition: ({ options }) => options.demo,
         content: () => {
             return dedent`
@@ -63,7 +62,6 @@ export const demos = [
     },
     {
         name: ({ kit }) => `${kit?.routesDirectory}/private/+layout.svelte`,
-        contentType: 'text',
         condition: ({ options }) => options.demo,
         content: () => {
             return dedent`
@@ -93,7 +91,6 @@ export const demos = [
     },
     {
         name: ({ kit }) => `${kit?.routesDirectory}/private/+page.svelte`,
-        contentType: 'text',
         condition: ({ options }) => options.demo,
         content: ({ options, typescript }) => {
             const [ts, cli] = createPrinter(typescript, options.cli);
@@ -151,7 +148,6 @@ export const demos = [
             `${kit?.routesDirectory}/private/+page.server.${
                 typescript ? 'ts' : 'js'
             }`,
-        contentType: 'text',
         condition: ({ options }) => options.demo && options.cli,
         content: ({ typescript }) => {
             const [ts] = createPrinter(typescript);
@@ -169,7 +165,6 @@ export const demos = [
     },
     {
         name: () => './supabase/migrations/00000000000000_demo.sql',
-        contentType: 'text',
         condition: ({ options }) => options.demo && options.cli,
         content: () => {
             return dedent`
